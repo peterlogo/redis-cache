@@ -4,11 +4,3 @@ version: 2.1
 orbs:
   typescript: vidsy/typescript@1.1.0
 # Orchestrate or schedule a set of jobs
-workflows:
-  # Name the workflow "welcome"
-  redis-cache:
-    # Run the welcome/run job in its own container
-    jobs:
-      - lint:
-          executor: node
-          linter: eslint
