@@ -9,4 +9,6 @@ workflows:
   redis-cache:
     # Run the welcome/run job in its own container
     jobs:
-      - welcome/run
+      lint:
+        executor: node
+        linter: eslint
