@@ -10,7 +10,7 @@
     "dev": "concurrently \"nodemon\" \"npm:docker\"",
     "build": "tsc",
     "docker": "docker-compose -f redis-compose.yml up",
-    "test": "mocha -r ts-node/register 'src/tests/**/*.ts'",
+    "test": "mocha --exit -r ts-node/register 'src/tests/**/*.ts'",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
