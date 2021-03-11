@@ -5,12 +5,11 @@ on:
     branches: [main]
 
 jobs:
-  test_pull_request:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - with: node 12
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
+
+      - name: Run Tests
+        run: npm run dev
+        run: npm test
