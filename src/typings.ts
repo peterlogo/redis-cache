@@ -17,6 +17,6 @@ export type ICacheClient = RedisClient;
  */
 export interface IRedisCacheService {
   on: () => ICacheClient;
-  set: (key: string, value: string) => Promise<string>;
+  set: (key: string, value: string, exp?: number) => Promise<string | undefined>;
   get: (key: string) => Promise<string | null>;
 }
