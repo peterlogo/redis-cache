@@ -1,7 +1,20 @@
+import { RedisClient } from 'redis';
+
 /**
- * Redis Cache class methods type defintions
+ * Redis-Cache Config type definitions.
  * @interface
  */
-export interface IRedisCache {
-  ttl: number;
+export interface IRedisCacheConfig {
+  host?: string;
+  port?: number;
+  ttl?: number;
+}
+
+/**
+ * Redis-Cache type definitions.
+ * @interface
+ */
+export interface IRedisCacheService {
+  on: () => RedisClient;
+  set: (key: string, value: string) => Promise<string>;
 }
