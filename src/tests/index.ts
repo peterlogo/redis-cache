@@ -33,6 +33,17 @@ describe('Cache Object', () => {
       assert.equal(res, 'OK');
     });
   });
+
+  describe('Get-Method', () => {
+    it('should return `value` of the given key.', async () => {
+      const value = await cache.get('Key1');
+      assert.equal(value, 'Hello');
+    });
+    it('should return `null` for the wrong key.', async () => {
+      const value = await cache.get('Key2');
+      assert.isNull(value);
+    });
+  });
 });
 
 // describe('Cache Configuration', () => {

@@ -26,7 +26,7 @@ export default class Cache implements IRedisCacheService {
 
   /**
    * Stores a value with its key
-   * in redis
+   * in redis.
    * @method
    * @param key
    * @param value
@@ -34,6 +34,23 @@ export default class Cache implements IRedisCacheService {
   set(key: string, value: string): Promise<string> {
     return new Promise((resolve, reject) => {
       this.client.set(key, value, function (err, reply) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(reply);
+        }
+      });
+    });
+  }
+
+  /**
+   * Gets a value with its key.
+   * @method
+   * @param key
+   */
+  get(key: string): Promise<string | null> {
+    return new Promise((resolve, reject) => {
+      this.client.get(key, function (err, reply) {
         if (err) {
           reject(err);
         } else {
