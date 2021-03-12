@@ -1,4 +1,4 @@
-import { IRedisCacheService, IRedisCacheConfig } from './typings';
+import { IRedisCacheService, ICacheConfig, ICacheClient } from './typings';
 import redis from 'redis';
 
 /**
@@ -6,10 +6,10 @@ import redis from 'redis';
  * @class
  */
 export class Cache implements IRedisCacheService {
-  client: redis.RedisClient;
-  config: IRedisCacheConfig | redis.ClientOpts;
-  constructor() {
-    this.config = {};
+  client: ICacheClient;
+  config: ICacheConfig;
+  constructor(options: ICacheConfig = {}) {
+    this.config = options;
     this.client = redis.createClient(this.config);
   }
 
@@ -18,7 +18,7 @@ export class Cache implements IRedisCacheService {
    * with a live redis-server.
    * @method
    */
-  on(): redis.RedisClient {
+  on(): ICacheClient {
     return this.client.on('error', function (error) {
       throw error;
     });
