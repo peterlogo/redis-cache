@@ -1,5 +1,5 @@
 import * as chai from 'chai';
-import { Cache } from './../index';
+import Cache from './../index';
 
 const assert = chai.assert;
 
