@@ -1,5 +1,5 @@
 import * as chai from 'chai';
-import { Cache } from './../index';
+import Cache from './../index';
 
 const assert = chai.assert;
 
@@ -12,25 +12,48 @@ describe('Cache Object', () => {
   });
 
   describe('Properties', () => {
-    it('should have `config` property', () => {
+    it('should have `config` property.', () => {
       assert.property(cache, 'config');
     });
 
-    it('should have `client` property', () => {
+    it('should have `client` property.', () => {
       assert.property(cache, 'client');
     });
   });
 
   describe('Connection', () => {
-    it('should connect to `redis-server`', () => {
+    it('should connect to `redis-server`.', () => {
       assert.isOk(cache);
     });
   });
 
   describe('Set-Method', () => {
-    it('should return `OK`', async () => {
+    it('should return `OK` when value is saved.', async () => {
       const res = await cache.set('Key1', 'Hello');
       assert.equal(res, 'OK');
     });
   });
+
+  describe('Get-Method', () => {
+    it('should return `value` of the given key.', async () => {
+      const value = await cache.get('Key1');
+      assert.equal(value, 'Hello');
+    });
+    it('should return `null` for the wrong key.', async () => {
+      const value = await cache.get('Key2');
+      assert.isNull(value);
+    });
+  });
 });
+
+// describe('Cache Configuration', () => {
+//   let cache: Cache;
+
+//   beforeEach(() => {
+//     cache = new Cache({ port: 8080 });
+//   });
+
+//   it('should update default `port number`', () => {
+//     assert.isDefined(cache.client);
+//   });
+// });
