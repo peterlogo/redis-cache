@@ -32,6 +32,13 @@ describe('Cache Object', () => {
       const res = await cache.set('Key1', 'Hello');
       assert.equal(res, 'OK');
     });
+    it('should expire after `10s`.', async () => {
+      await cache.set('Key3', 'Peter', 10);
+      setTimeout(async () => {
+        const res = await cache.get('Key3');
+        assert.isNull(res);
+      }, 10000);
+    });
   });
 
   describe('Get-Method', () => {
