@@ -7,7 +7,7 @@ import redis from 'redis';
  */
 export class Cache implements IRedisCacheService {
   client: redis.RedisClient;
-  config: IRedisCacheConfig;
+  config: IRedisCacheConfig | redis.ClientOpts;
   constructor() {
     this.config = {};
     this.client = redis.createClient(this.config);
