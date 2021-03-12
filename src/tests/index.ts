@@ -32,7 +32,7 @@ describe('Cache Object', () => {
       const res = await cache.set('Key1', 'Hello');
       assert.equal(res, 'OK');
     });
-    it('should expire after `10s`.', async () => {
+    it('should expire after `10 seconds`.', async () => {
       await cache.set('Key3', 'Peter', 10);
       setTimeout(async () => {
         const res = await cache.get('Key3');
@@ -46,7 +46,7 @@ describe('Cache Object', () => {
       const value = await cache.get('Key1');
       assert.equal(value, 'Hello');
     });
-    it('should return `null` for the wrong key.', async () => {
+    it('should return `null` for an invalid key.', async () => {
       const value = await cache.get('Key2');
       assert.isNull(value);
     });
