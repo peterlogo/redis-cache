@@ -34,12 +34,33 @@ describe('Cache Object', () => {
     });
   });
 
+  describe('CheckTime-Method', () => {
+    it('should expire after `10 seconds`.', async () => {
+      await cache.set('Key3', 'Peter', 10);
+      setTimeout(async () => {
+        const res = await cache.get('Key3');
+        assert.isNull(res);
+      }, 10000);
+    });
+    it('should return the `time left` before expiring.', async () => {
+      await cache.set('Key3', 'Logo', 10);
+      setTimeout(async () => {
+        const timeLeft = await cache.checkTime('Key3');
+        assert.isNumber(timeLeft);
+      }, 5000);
+    });
+    it('should return `-1` for non-existing key', async () => {
+      const timeLeft = await cache.checkTime('Key1');
+      assert.equal(timeLeft, -1);
+    });
+  });
+
   describe('Get-Method', () => {
     it('should return `value` of the given key.', async () => {
       const value = await cache.get('Key1');
       assert.equal(value, 'Hello');
     });
-    it('should return `null` for the wrong key.', async () => {
+    it('should return `null` for an invalid key.', async () => {
       const value = await cache.get('Key2');
       assert.isNull(value);
     });

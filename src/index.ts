@@ -25,15 +25,13 @@ export default class Cache implements IRedisCacheService {
   }
 
   /**
-   * Stores a value with its key
-   * in redis.
-   * @method
+   * Checks the remaining time left for a key,
+   * with an expiry time.
    * @param key
-   * @param value
    */
-  set(key: string, value: string): Promise<string> {
+  checkTime(key: string): Promise<number | undefined> {
     return new Promise((resolve, reject) => {
-      this.client.set(key, value, function (err, reply) {
+      this.client.ttl(key, function (err, reply) {
         if (err) {
           reject(err);
         } else {
@@ -41,6 +39,37 @@ export default class Cache implements IRedisCacheService {
         }
       });
     });
+  }
+
+  /**
+   * Stores a value with its key
+   * in redis.
+   * @method
+   * @param key
+   * @param value
+   */
+  set(key: string, value: string, exp?: number): Promise<string | undefined> {
+    if (exp) {
+      return new Promise((resolve, reject) => {
+        this.client.set(key, value, 'EX', exp, function (err, reply) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(reply);
+          }
+        });
+      });
+    } else {
+      return new Promise((resolve, reject) => {
+        this.client.set(key, value, function (err, reply) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(reply);
+          }
+        });
+      });
+    }
   }
 
   /**
