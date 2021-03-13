@@ -25,6 +25,23 @@ export default class Cache implements IRedisCacheService {
   }
 
   /**
+   * Checks the remaining time left for a key,
+   * with an expiry time.
+   * @param key
+   */
+  checkTime(key: string): Promise<number | undefined> {
+    return new Promise((resolve, reject) => {
+      this.client.ttl(key, function (err, reply) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(reply);
+        }
+      });
+    });
+  }
+
+  /**
    * Stores a value with its key
    * in redis.
    * @method
