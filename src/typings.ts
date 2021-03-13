@@ -20,4 +20,5 @@ export interface IRedisCacheService {
   checkTime: (key: string) => Promise<number | undefined>;
   set: (key: string, value: string, exp?: number) => Promise<string | undefined>;
   get: (key: string) => Promise<string | null>;
+  //multiSet: (keys: string[]) => Promise<string | undefined>;
 }
