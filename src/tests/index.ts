@@ -49,7 +49,7 @@ describe('Cache Object:', () => {
         assert.isNumber(timeLeft);
       }, 5000);
     });
-    it('should return `-1` for non-existing key', async () => {
+    it('should return `-1` for non-existing key.', async () => {
       const timeLeft = await cache.checkTime('Key1');
       assert.equal(timeLeft, -1);
     });
@@ -88,15 +88,15 @@ describe('Cache Object:', () => {
       const res = await cache.multiSet(keys);
       assert.equal(res, 'OK');
     });
-    it('should return the value:`San` with given key:`myKey`', async () => {
+    it('should return the value:`San` with given key:`myKey`.', async () => {
       const value = await cache.get('myKey');
       assert.equal(value, 'San');
     });
-    it('should return the value:`Paul` with given key:`myNextKey`', async () => {
+    it('should return the value:`Paul` with given key:`myNextKey`.', async () => {
       const value = await cache.get('myNextKey');
       assert.equal(value, 'Paul');
     });
-    it('should return the value:`Magaret` with given key:`myLastKey`', async () => {
+    it('should return the value:`Magaret` with given key:`myLastKey`.', async () => {
       const value = await cache.get('myLastKey');
       assert.equal(value, 'Magaret');
     });
@@ -111,7 +111,7 @@ describe('Cache Object:', () => {
   });
 
   describe('MultiDel-Method', () => {
-    it('should return `number of deleted keys` after deleting the keys', async () => {
+    it('should return `number of deleted keys` after deleting the keys.', async () => {
       const keys = ['myKey', 'myNextKey'];
       const res = await cache.multiDel(keys);
       assert.equal(res, keys.length);
