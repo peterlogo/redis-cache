@@ -28,6 +28,7 @@ export default class Cache implements IRedisCacheService {
   /**
    * Checks the remaining time left for a key,
    * with an expiry time.
+   * @method
    * @param key
    */
   checkTime(key: string): Promise<number | undefined> {
