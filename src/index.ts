@@ -1,4 +1,5 @@
-import { IRedisCacheService, ICacheConfig, ICacheClient } from './typings';
+import { convertToArray } from './utils/index';
+import { IRedisCacheService, ICacheConfig, ICacheClient, ICacheProp } from './typings';
 import redis from 'redis';
 
 /**
@@ -80,6 +81,24 @@ export default class Cache implements IRedisCacheService {
   get(key: string): Promise<string | null> {
     return new Promise((resolve, reject) => {
       this.client.get(key, function (err, reply) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(reply);
+        }
+      });
+    });
+  }
+
+  /**
+   * Stores multiple keys and values in redis.
+   * @method
+   * @param items
+   */
+  multiSet(items: ICacheProp[]): Promise<string | boolean> {
+    return new Promise((resolve, reject) => {
+      const data = convertToArray(items);
+      this.client.mset(data, function (err, reply) {
         if (err) {
           reject(err);
         } else {
