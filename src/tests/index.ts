@@ -3,7 +3,7 @@ import Cache from './../index';
 
 const assert = chai.assert;
 
-describe('Cache Object', () => {
+describe('Cache Object:', () => {
   let cache: Cache;
 
   beforeEach(() => {
@@ -66,6 +66,18 @@ describe('Cache Object', () => {
     });
   });
 
+  describe('Del-Method', () => {
+    it('should return `1` after deleting a key.', async () => {
+      await cache.set('myKey', 'Peter');
+      const res = await cache.del('myKey');
+      assert.equal(res, 1);
+    });
+    it('should return `null` for trying to get a deleted key.', async () => {
+      const res = await cache.get('myKey');
+      assert.equal(res, null);
+    });
+  });
+
   describe('MultiSet-Method', () => {
     it('should return `OK` when keys and values are saved.', async () => {
       const keys = [
@@ -87,6 +99,22 @@ describe('Cache Object', () => {
     it('should return the value:`Magaret` with given key:`myLastKey`', async () => {
       const value = await cache.get('myLastKey');
       assert.equal(value, 'Magaret');
+    });
+  });
+
+  describe('MultiGet-Method', () => {
+    it('should return an `array of values` of each respective key.', async () => {
+      const keys = ['myKey', 'myNextKey'];
+      const actual = await cache.multiGet(keys);
+      assert.isArray(actual);
+    });
+  });
+
+  describe('MultiDel-Method', () => {
+    it('should return `number of deleted keys` after deleting the keys', async () => {
+      const keys = ['myKey', 'myNextKey'];
+      const res = await cache.multiDel(keys);
+      assert.equal(res, keys.length);
     });
   });
 });

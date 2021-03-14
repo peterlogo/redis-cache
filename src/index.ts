@@ -91,6 +91,22 @@ export default class Cache implements IRedisCacheService {
   }
 
   /**
+   * Deletes a key from redis.
+   * @param key
+   */
+  del(key: string): Promise<string | number> {
+    return new Promise((resolve, reject) => {
+      this.client.del(key, function (err, reply) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(reply);
+        }
+      });
+    });
+  }
+
+  /**
    * Stores multiple keys and values in redis.
    * @method
    * @param items
@@ -99,6 +115,42 @@ export default class Cache implements IRedisCacheService {
     return new Promise((resolve, reject) => {
       const data = convertToArray(items);
       this.client.mset(data, function (err, reply) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(reply);
+        }
+      });
+    });
+  }
+
+  /**
+   * Gets values of multiple keys from
+   * redis.
+   * @method
+   * @param keys
+   */
+  multiGet(keys: string[]): Promise<string | string[]> {
+    return new Promise((resolve, reject) => {
+      this.client.mget(keys, function (err, reply) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(reply);
+        }
+      });
+    });
+  }
+
+  /**
+   * Deletes multiple keys from
+   * redis.
+   * @method
+   * @param keys
+   */
+  multiDel(keys: string[]): Promise<string | number> {
+    return new Promise((resolve, reject) => {
+      this.client.del(keys, function (err, reply) {
         if (err) {
           reject(err);
         } else {
