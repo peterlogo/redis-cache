@@ -12,6 +12,16 @@ export type ICacheConfig = ClientOpts;
 export type ICacheClient = RedisClient;
 
 /**
+ * Cache proptery object type
+ * definitions.
+ * @interface
+ */
+export interface ICacheProp {
+  key: string;
+  value: string;
+}
+
+/**
  * Redis-Cache type definitions.
  * @interface
  */
@@ -20,4 +30,5 @@ export interface IRedisCacheService {
   checkTime: (key: string) => Promise<number | undefined>;
   set: (key: string, value: string, exp?: number) => Promise<string | undefined>;
   get: (key: string) => Promise<string | null>;
+  multiSet: (items: ICacheProp[]) => Promise<string | boolean>;
 }

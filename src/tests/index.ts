@@ -65,6 +65,30 @@ describe('Cache Object', () => {
       assert.isNull(value);
     });
   });
+
+  describe('MultiSet-Method', () => {
+    it('should return `OK` when keys and values are saved.', async () => {
+      const keys = [
+        { key: 'myKey', value: 'San' },
+        { key: 'myNextKey', value: 'Paul' },
+        { key: 'myLastKey', value: 'Magaret' }
+      ];
+      const res = await cache.multiSet(keys);
+      assert.equal(res, 'OK');
+    });
+    it('should return the value:`San` with given key:`myKey`', async () => {
+      const value = await cache.get('myKey');
+      assert.equal(value, 'San');
+    });
+    it('should return the value:`Paul` with given key:`myNextKey`', async () => {
+      const value = await cache.get('myNextKey');
+      assert.equal(value, 'Paul');
+    });
+    it('should return the value:`Magaret` with given key:`myLastKey`', async () => {
+      const value = await cache.get('myLastKey');
+      assert.equal(value, 'Magaret');
+    });
+  });
 });
 
 // describe('Cache Configuration', () => {
