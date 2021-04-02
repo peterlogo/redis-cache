@@ -118,15 +118,3 @@ describe('Cache Object:', () => {
     });
   });
 });
-
-// describe('Cache Configuration', () => {
-//   let cache: Cache;
-
-//   beforeEach(() => {
-//     cache = new Cache({ port: 8080 });
-//   });
-
-//   it('should update default `port number`', () => {
-//     assert.isDefined(cache.client);
-//   });
-// });
