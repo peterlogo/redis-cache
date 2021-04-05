@@ -1,4 +1,4 @@
-import { ICheckFormat, ICheckMultiFormat, IConvertToArray, IConvertToJson, IConvertToObject, IIsJson } from './typings';
+import { ICheckFormat, IConvertToArray, IIsJson, IMultiCheckFormat } from './typings';
 
 /**
  * Checks if string is a valid
@@ -12,24 +12,6 @@ export const isJson: IIsJson = (value) => {
   } catch (error) {
     return false;
   }
-};
-
-/**
- * Converts object to json string.
- * @param value
- */
-export const convertToJson: IConvertToJson = (value) => {
-  const data = JSON.stringify(value);
-  return data;
-};
-
-/**
- * Converts json string to object.
- * @param value
- */
-export const convertToObject: IConvertToObject = (value) => {
-  const data = JSON.parse(value);
-  return data;
 };
 
 /**
@@ -49,7 +31,7 @@ export const checkFormat: ICheckFormat = (value) => {
  * valid json strings to objects.
  * @param value
  */
-export const checkMultiFormat: ICheckMultiFormat = (value) => {
+export const multiCheckFormat: IMultiCheckFormat = (value) => {
   const data: Array<string | Record<string, unknown>> = [];
   let item: string;
   for (item of value) {
@@ -59,7 +41,7 @@ export const checkMultiFormat: ICheckMultiFormat = (value) => {
       continue;
     }
     const val = JSON.parse(item);
-    data.push(JSON.parse(val));
+    data.push(val);
   }
   return data;
 };
