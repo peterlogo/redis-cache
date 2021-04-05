@@ -71,6 +71,7 @@ describe('Cache Object:', () => {
 
   describe('Get-Method', () => {
     it('should return `value` of the given key.', async () => {
+      await cache.set('Key1', 'Hello');
       const value = await cache.get('Key1');
       assert.equal(value, 'Hello');
     });
