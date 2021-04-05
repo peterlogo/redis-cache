@@ -63,9 +63,9 @@ describe('Cache Object:', () => {
         assert.isNumber(timeLeft);
       }, 5000);
     });
-    it('should return `-1` for non-existing key.', async () => {
-      const timeLeft = await cache.checkTime('Key1');
-      assert.equal(timeLeft, -1);
+    it('should return `-2` for non-existing key.', async () => {
+      const timeLeft = await cache.checkTime('Key5');
+      assert.equal(timeLeft, -2);
     });
   });
 
