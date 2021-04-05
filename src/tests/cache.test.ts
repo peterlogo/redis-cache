@@ -1,7 +1,10 @@
 import * as chai from 'chai';
-import Cache from './../index';
+import * as sinon from 'sinon';
+import sinonTest from 'sinon-test';
+import Cache from '../index';
 
-const assert = chai.assert;
+const { assert, expect } = chai;
+const test = sinonTest(sinon);
 
 describe('Cache Object:', () => {
   let cache: Cache;
@@ -13,25 +16,36 @@ describe('Cache Object:', () => {
 
   describe('Properties', () => {
     it('should have `config` property.', () => {
-      assert.property(cache, 'config');
+      expect(cache).to.have.property('config');
     });
 
     it('should have `client` property.', () => {
-      assert.property(cache, 'client');
+      expect(cache).to.have.property('client');
     });
   });
 
   describe('Connection', () => {
-    it('should connect to `redis-server`.', () => {
-      assert.isOk(cache);
-    });
+    it(
+      'should connect to `redis-server`.',
+      test(() => {
+        const on = sinon.stub(cache, 'on');
+        expect(on).to.not.throw();
+      })
+    );
   });
 
   describe('Set-Method', () => {
-    it('should return `OK` when value is saved.', async () => {
-      const res = await cache.set('Key1', 'Hello');
-      assert.equal(res, 'OK');
-    });
+    it(
+      'should return `OK` when value is saved.',
+      test(async () => {
+        const set = sinon.stub(cache, 'set').resolves('OK');
+        const res = await cache.set('Key1', 'Hello');
+
+        sinon.assert.calledWith(set, 'Key1', 'Hello');
+        sinon.assert.calledOnce(set);
+        expect(res).to.equal('OK');
+      })
+    );
   });
 
   describe('CheckTime-Method', () => {
@@ -49,14 +63,15 @@ describe('Cache Object:', () => {
         assert.isNumber(timeLeft);
       }, 5000);
     });
-    it('should return `-1` for non-existing key.', async () => {
-      const timeLeft = await cache.checkTime('Key1');
-      assert.equal(timeLeft, -1);
+    it('should return `-2` for non-existing key.', async () => {
+      const timeLeft = await cache.checkTime('Key5');
+      assert.equal(timeLeft, -2);
     });
   });
 
   describe('Get-Method', () => {
     it('should return `value` of the given key.', async () => {
+      await cache.set('Key1', 'Hello');
       const value = await cache.get('Key1');
       assert.equal(value, 'Hello');
     });
@@ -118,15 +133,3 @@ describe('Cache Object:', () => {
     });
   });
 });
-
-// describe('Cache Configuration', () => {
-//   let cache: Cache;
-
-//   beforeEach(() => {
-//     cache = new Cache({ port: 8080 });
-//   });
-
-//   it('should update default `port number`', () => {
-//     assert.isDefined(cache.client);
-//   });
-// });

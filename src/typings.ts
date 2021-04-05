@@ -18,7 +18,7 @@ export type ICacheClient = RedisClient;
  */
 export interface ICacheProp {
   key: string;
-  value: string;
+  value: string | Record<string, unknown>;
 }
 
 /**
