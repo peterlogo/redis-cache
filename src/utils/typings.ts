@@ -10,7 +10,14 @@ export type IConvertToArray = (items: ICacheProp[]) => Array<string>;
  * @function isJson type definition.
  * @type
  */
-export type IIsJson = (value: string) => boolean;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type IIsJson = (value: any) => boolean;
+
+/**
+ * @function toJson type definition.
+ * @type
+ */
+export type IToJson = (value: string | Record<string, unknown>) => string;
 
 /**
  * @function checkFormat type definition.

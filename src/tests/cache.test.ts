@@ -46,6 +46,18 @@ describe('Cache Object:', () => {
         expect(res).to.equal('OK');
       })
     );
+    it(
+      'should return `OK` when value is an object.',
+      test(async () => {
+        const set = sinon.stub(cache, 'set').resolves('OK');
+        const obj = { name: 'My name', skills: ['Javascript', 'Python'] };
+        const res = await cache.set('Key10', obj);
+
+        sinon.assert.calledWith(set, 'Key10', obj);
+        sinon.assert.calledOnce(set);
+        expect(res).to.equal('OK');
+      })
+    );
   });
 
   describe('CheckTime-Method', () => {
@@ -78,6 +90,12 @@ describe('Cache Object:', () => {
     it('should return `null` for an invalid key.', async () => {
       const value = await cache.get('Key2');
       assert.isNull(value);
+    });
+    it('should return an `object` if value is a JSON string.', async () => {
+      const obj = { name: 'My name', skills: ['Javascript', 'Python'] };
+      await cache.set('key12', obj);
+      const actual = await cache.get('key12');
+      expect(actual).to.deep.equal(obj);
     });
   });
 
@@ -119,7 +137,7 @@ describe('Cache Object:', () => {
 
   describe('MultiGet-Method', () => {
     it('should return an `array of values` of each respective key.', async () => {
-      const keys = ['myKey', 'myNextKey'];
+      const keys = ['myKey', 'myNextKey', 'key12'];
       const actual = await cache.multiGet(keys);
       assert.isArray(actual);
     });

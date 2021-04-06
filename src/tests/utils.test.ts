@@ -1,5 +1,5 @@
 import * as chai from 'chai';
-import { checkFormat, convertToArray, isJson, multiCheckFormat } from '../utils';
+import { checkFormat, convertToArray, isJson, multiCheckFormat, toJson } from '../utils';
 const expect = chai.expect;
 
 describe('Utility Functions:', () => {
@@ -13,6 +13,20 @@ describe('Utility Functions:', () => {
       const json = '{key:true, value:42}';
       const result = isJson(json);
       expect(result).to.equal(false);
+    });
+  });
+
+  describe('ToJson function', () => {
+    it('should return a `string` if value is a string.', () => {
+      const actual = toJson('Hello');
+      const expected = 'Hello';
+      expect(actual).to.be.equal(expected);
+    });
+    it('should return a `JSON string` if value is an object.', () => {
+      const value = { key: true, value: 42 };
+      const actual = toJson(value);
+      const expected = JSON.stringify(value);
+      expect(actual).to.be.equal(expected);
     });
   });
 
