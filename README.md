@@ -1,6 +1,6 @@
 # redis-cache
 
-A cache service using redis.
+A node cache package using redis.
 
 ### Status:
-> Development in progress
+> Documentation in progress.
