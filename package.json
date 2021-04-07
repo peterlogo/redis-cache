@@ -1,11 +1,11 @@
 {
   "name": "rn-cache",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A cache service using redis.",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "format": "prettier --config .prettierrc '.src/**/*.ts' --write",
     "lint:fix": "eslint . --ext .ts --fix",
     "lint": "eslint . --ext .ts",
     "dev": "concurrently \"nodemon\" \"npm:docker\"",
