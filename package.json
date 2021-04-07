@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A cache service using redis.",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "lint:fix": "eslint . --ext .ts --fix",
