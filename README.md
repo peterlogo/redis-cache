@@ -12,7 +12,7 @@ asynchronous operations.
 
 Basic redis-cache implementation.
 
-    import Cache from 'redis-cache';
+    import Cache from 'rn-cache';
     
     // create a cache instance.
     const cache = new Cache();
