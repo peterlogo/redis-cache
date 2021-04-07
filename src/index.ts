@@ -1,4 +1,4 @@
-import { convertToArray } from './utils/index';
+import { checkFormat, convertToArray, toJson } from './utils/index';
 import { IRedisCacheService, ICacheConfig, ICacheClient, ICacheProp } from './typings';
 import redis from 'redis';
 
@@ -50,10 +50,11 @@ export default class Cache implements IRedisCacheService {
    * @param key
    * @param value
    */
-  set(key: string, value: string, exp?: number): Promise<string | undefined> {
+  set(key: string, value: string | Record<string, unknown>, exp?: number): Promise<string | undefined> {
+    const data = toJson(value);
     if (exp) {
       return new Promise((resolve, reject) => {
-        this.client.set(key, value, 'EX', exp, function (err, reply) {
+        this.client.set(key, data, 'EX', exp, function (err, reply) {
           if (err) {
             reject(err);
           } else {
@@ -63,7 +64,7 @@ export default class Cache implements IRedisCacheService {
       });
     } else {
       return new Promise((resolve, reject) => {
-        this.client.set(key, value, function (err, reply) {
+        this.client.set(key, data, function (err, reply) {
           if (err) {
             reject(err);
           } else {
@@ -79,13 +80,14 @@ export default class Cache implements IRedisCacheService {
    * @method
    * @param key
    */
-  get(key: string): Promise<string | null> {
+  get(key: string): Promise<string | Record<string, unknown> | null> {
     return new Promise((resolve, reject) => {
       this.client.get(key, function (err, reply) {
         if (err) {
           reject(err);
         } else {
-          resolve(reply);
+          const data = checkFormat(reply);
+          resolve(data);
         }
       });
     });

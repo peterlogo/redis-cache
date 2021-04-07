@@ -1,7 +1,7 @@
-import { ICheckFormat, IConvertToArray, IIsJson, IMultiCheckFormat } from './typings';
+import { ICheckFormat, IConvertToArray, IIsJson, IMultiCheckFormat, IToJson } from './typings';
 
 /**
- * Checks if string is a valid
+ * Checks if a value is a valid
  * json string.
  * @param value
  */
@@ -12,6 +12,16 @@ export const isJson: IIsJson = (value) => {
   } catch (error) {
     return false;
   }
+};
+
+/**
+ * Converts a string to a valid
+ * json string.
+ * @param value
+ */
+export const toJson: IToJson = (value) => {
+  if (typeof value === 'string') return value;
+  return JSON.stringify(value);
 };
 
 /**

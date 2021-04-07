@@ -28,8 +28,8 @@ export interface ICacheProp {
 export interface IRedisCacheService {
   on: () => ICacheClient;
   checkTime: (key: string) => Promise<number | undefined>;
-  set: (key: string, value: string, exp?: number) => Promise<string | undefined>;
-  get: (key: string) => Promise<string | null>;
+  set: (key: string, value: string | Record<string, unknown>, exp?: number) => Promise<string | undefined>;
+  get: (key: string) => Promise<string | Record<string, unknown> | null>;
   del: (key: string) => Promise<string | number>;
   multiSet: (items: ICacheProp[]) => Promise<string | boolean>;
   multiGet: (keys: string[]) => Promise<string | string[]>;
