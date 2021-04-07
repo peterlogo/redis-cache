@@ -6,7 +6,7 @@ This package was written on top of the [node-redis](https://github.com/NodeRedis
 asynchronous operations.
 
 ## Installation
-    npm install redis-cache
+    npm install rn-cache
     
 ## Usage
 

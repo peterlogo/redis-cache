@@ -1,6 +1,6 @@
 {
-  "name": "redis-cache",
-  "version": "1.0.0",
+  "name": "rn-cache",
+  "version": "1.0.1",
   "description": "A cache service using redis.",
   "main": "index.js",
   "types": "index.d.ts",
