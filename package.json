@@ -1,11 +1,11 @@
 {
   "name": "rn-cache",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "A cache service using redis.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "format": "prettier --config .prettierrc '.src/**/*.ts' --write",
+    "format": "prettier --config .prettierrc 'dist' --write",
     "lint:fix": "eslint . --ext .ts --fix",
     "lint": "eslint . --ext .ts",
     "dev": "concurrently \"nodemon\" \"npm:docker\"",
@@ -15,7 +15,7 @@
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
-    "version": "npm run format && git add .",
+    "version": "npm run lint && git add .",
     "postversion": "git push && git push --tags",
     "publish": "npm publish"
   },
@@ -31,9 +31,12 @@
   "files": [
     "dist/**/*"
   ],
-  "keywords": [],
+  "keywords": [
+    "redis",
+    "cache"
+  ],
   "author": "Peter Logo",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/peterlogo/redis-cache/issues"
   },
