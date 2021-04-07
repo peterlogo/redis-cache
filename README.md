@@ -35,7 +35,7 @@ Basic redis-cache implementation.
 	    return value;
     }
 
-**Promises:**
+#### **Promises:**
 Package methods are asynchronous in nature and also supports the use of promises. Below is a simple usage
 involving promises;
 
@@ -45,16 +45,16 @@ involving promises;
     .catch((error) => { throw error })
 
 ## API
-**"options:"**  
+#### **"options:"**  
 
     const cache = new Cache({...options})
 In order to configure the redis client connection, redis-cache takes in different option parameters as custom
 configuration. These options are the same as seen in [node-redis package](https://github.com/NodeRedis/node-redis).
 
-**Methods:**
+### **Methods:**
 These are the available methods in redis-cache;
 
-### `on:`  
+#### `on:`  
 It creates a redis client connection with the redis server. 
 
     // it always listens for a client connection.
@@ -63,16 +63,17 @@ It creates a redis client connection with the redis server.
 > Throws an *error* if a connection cannot be established.
 
     
-### `set:`  
+#### `set:`  
 Stores a value with it's given key.
 
     const response = await cache.set(key, value, exp)
 
 > It returns a string 'OK' when the value is saved.
 > 
-`key` : string.
-`value` : string or object.
-`exp` :  number. This parameter is optional, it is the time it takes for a key to expire in *seconds*. 
+
+ - `key` : string.
+ -  `value` : string or object.
+ -  `exp` :  number. This parameter is optional, it is the time it takes for a key to expire in *seconds*.
 
 Example:
 
@@ -89,7 +90,7 @@ Example:
     // not using expiration time.
     const response = await cache.set(key, value);
   
- ### `checkTime:`  
+ #### `checkTime:`  
  It returns the time left for a key before it expires. Here the key being checked must have an expiration time attached to it.
  
 
@@ -98,9 +99,10 @@ Example:
 
 > It returns a number in seconds.
 >
-`key` : string.
 
- ### `get:`  
+ - `key` : string.
+
+ #### `get:`  
  It returns the value of a given key.
  
 
@@ -111,16 +113,17 @@ Example:
 > if the value is an object.
 > 
 
-### `del:`  
+#### `del:`  
 It deletes a key from redis.
 
     const response = await cache.del(key)
 
 > It returns 1 if the key has been deleted.
 >
-`key` : string.
 
-### `multiSet:`  
+ - `key` : string.
+
+#### `multiSet:`  
 Stores multiple keys  with their respective values.
 
     const keys = [
@@ -133,9 +136,11 @@ Stores multiple keys  with their respective values.
 
 > It returns 'OK' if the keys are saved.
 >
-`keys` :  an array of objects, with property's key and value. Where `key: string` and `value: string | object` .
 
- ### `multiGet:`  
+ - `keys` :  an array of objects, with property's key and value. Where
+   `key: string` and `value: string | object` .
+
+ #### `multiGet:`  
  Gets the values of multiple keys.
  
     const keys = ['myKey', 'myNextKey'];
@@ -144,16 +149,18 @@ Stores multiple keys  with their respective values.
 
 > It returns an array of values, where each value corresponds to the given key in the keys-parameter.
 >
-`keys` : an array of strings, where each string is a key.
 
-### `multiDel:`  
+ - `keys` : an array of strings, where each string is a key.
+
+#### `multiDel:`  
 Deletes multiple keys from redis.
 
     const keys = ['myKey', 'myNextKey'];
     const response = await cache.multiDel(keys);
  > It returns the number of deleted keys.
 >  
-`keys` : an array of strings, where each string is a key.
+
+ - `keys` : an array of strings, where each string is a key.
 
 ## License:
 This code is licensed under the `MIT-License`.
