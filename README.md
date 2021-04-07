@@ -1,4 +1,4 @@
-# redis-cache
+# Redis Cache
 
 **A node cache package using redis.**
 
