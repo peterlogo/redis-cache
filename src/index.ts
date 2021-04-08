@@ -6,7 +6,7 @@ import redis from 'redis';
  * Redis-Cache class
  * @class
  */
-export default class Cache implements IRedisCacheService {
+class Cache implements IRedisCacheService {
   client: ICacheClient;
   config: ICacheConfig;
   constructor(options: ICacheConfig = {}) {
@@ -163,3 +163,5 @@ export default class Cache implements IRedisCacheService {
     });
   }
 }
+
+export default Cache;

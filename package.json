@@ -4,6 +4,7 @@
   "description": "A cache service using redis.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "format": "prettier --config .prettierrc 'dist' --write",
     "lint:fix": "eslint . --ext .ts --fix",
