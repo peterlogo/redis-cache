@@ -1,4 +1,4 @@
-import { checkFormat, convertToArray, toJson } from './utils/index';
+import { checkFormat, convertToArray, toJson } from './utils';
 import { IRedisCacheService, ICacheConfig, ICacheClient, ICacheProp } from './typings';
 import redis from 'redis';
 
