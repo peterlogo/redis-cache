@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-      "target": "esNext",                          
+      "target": "ES6",                          
       "module": "commonjs",                    
-      "lib": ["es6"],                     
+      "lib": ["ES6","DOM", "ES2017", "ESNext"],                     
       "allowJs": true,
       "outDir": "dist",                          
       "rootDir": "src",
@@ -10,7 +10,9 @@
       "declaration": true,         
       "noImplicitAny": false,
       "esModuleInterop": true,
-      "resolveJsonModule": true
-      
-    }
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+    },
+    "include": ["src"],
+    "exclude": ["node_modules","src/**/*.test.ts"]
 }
